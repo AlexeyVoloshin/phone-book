@@ -1,9 +1,13 @@
+/* eslint-disable no-console */
 import React from 'react';
 import Header from '../../components/Header';
+import ListPhone from '../../components/List/ListPhone';
+
 
 import s from './Home.module.scss';
 
 const HomeComponent = () => {
+	
 	return (
 		<div className={s.home}>
 			<Header />
@@ -14,7 +18,7 @@ const HomeComponent = () => {
 					</div>
 				</header>
 				<main className='home__list'>
-					<p>Список телефонов</p>
+					<ListPhone />
 				</main>
 			</div>
 		</div>

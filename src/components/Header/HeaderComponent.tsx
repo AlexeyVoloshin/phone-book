@@ -4,19 +4,14 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import s from './Header.module.scss';
-
-interface IMenu {
-	id: number
-	value: string
-	link: string
-}
+import { IMenu } from '../../routes';
 
 interface IProps {
-	activePage: boolean
+	path: string
 	MENU: IMenu[]
 }
 
-const HeaderComponent: React.FC<IProps> = ({MENU, activePage}) => {
+const HeaderComponent: React.FC<IProps> = ({MENU, path}) => {
 	return (
 		<header className={s.header}>
 			<div className={s.header__wrap}>
@@ -25,11 +20,11 @@ const HeaderComponent: React.FC<IProps> = ({MENU, activePage}) => {
 				</div>
 				<nav className={cn(s.menuWrap)}>
 					{
-						MENU.map(({id, value, link }) => (
-							<Link key={id} to={link} className={cn(
+						MENU.map(({ title, link }) => (
+							<Link key={title} to={link} className={cn(
 								s.menuWrap__menulink,{
-								[s.activeLinck]: activePage })}>
-									{value}
+								[s.activeLinck]: link === path })}>
+									{title}
 							</Link>
 						))
 					}

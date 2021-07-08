@@ -5,8 +5,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// max-width: 1160px;
-	// margin: 0 auto;
+	
 	&__form_wrap {
 		width: 400px;
 		background-color: $white;
@@ -15,3 +14,4 @@
 		padding: 24px;
 	}
 }
+

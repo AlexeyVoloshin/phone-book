@@ -11,21 +11,32 @@ const { Content } = Layout;
 interface IProps {
 	onFinish: (event: any) => void
 	onFinishFailed: (event: any) => void
+	handleInputField: (event: React.ChangeEvent<HTMLInputElement>) => void
 	message: string
+	formValid: boolean
+	validateStatus: any
+	formError: ({
+		[key: string] : string 
+	})
 }
 
 type DataType = {
 	email: string
 	password: string
-	// onFinish: (event: React.ChangeEvent<HTMLInputElement>) => void
+	onFinish: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const LoginComponent: React.FC<IProps> = ({
 		onFinish, 
-		onFinishFailed, 
-		message
+		onFinishFailed,
+		handleInputField, 
+		message,
+		validateStatus,
+		// formError,
+		formValid
 	}) => {
 		
+	// const validStat = `${validateStatus}` as keyof JSX.IntrinsicAttributes
 	return (
 		<Layout>
 			<Content>
@@ -36,28 +47,42 @@ const LoginComponent: React.FC<IProps> = ({
 							labelCol={{ span: 8 }}
 							wrapperCol={{ span: 16 }}
 							initialValues={{ remember: true }}
-							onFinish={onFinish }
+							onFinish={onFinish}
 							onFinishFailed={onFinishFailed}
 						>
 							<Form.Item
-							label="Email"
-							name="email"
-							rules={[{ required: true, message: 'Please input your email!' }]}
+								label="Email"
+								name="email"
+								id={validateStatus.email}
+								validateStatus={validateStatus.email}
+								// help={formError.email}
+								hasFeedback
+								rules={[{ 
+									required: true,
+									type: "email",
+									message: 'Please input your email!' }]}
 							>
-							<Input />
-						</Form.Item>
+								<Input type="email" onChange={handleInputField}/>
+							</Form.Item>
 							<Form.Item
-							label="Password"
-							name="password"
-							rules={[{ required: true, message: 'Please input your password!' }]}
+								label="Password"
+								name="password"
+								validateStatus={validateStatus.password}
+								// help={formError.password}
+								id={validateStatus.password}
+								hasFeedback
+								rules={[{ 
+									required: true,
+									message: 'Please input your password!' }]}
 							>
-							<Input.Password />
+							<Input.Password onChange={handleInputField}/>
 							</Form.Item>
 
 							<Form.Item 
 								wrapperCol={{ offset: 8, span: 5 }}
 							>
 							<Button 
+								disabled={!formValid && true }
 								type="primary" 
 								htmlType="submit"
 							>

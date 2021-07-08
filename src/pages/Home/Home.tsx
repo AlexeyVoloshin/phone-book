@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import HomeComponent from './HomeComponent';
 
-
 const Home: React.FC = ()  => {
 	
 	// const [data, setData] = useState(null);
